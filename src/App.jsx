@@ -3,6 +3,16 @@ import './App.css';
 import { ChitsContainer } from './components/ChitsContainer.jsx';
 
 function App() {
+    const [currentWord, setCurrentWord] = useState('react');
+
+    const secretWord = currentWord.split('').map((word) => word.toUpperCase());
+
+    const secretWordSpan = secretWord.map((letter, index) => (
+        <span key={index} id={index} className="letterbox">
+            {letter}
+        </span>
+    ));
+
     return (
         <main>
             <header>
@@ -17,6 +27,7 @@ function App() {
                 <p>Well done! 🎉</p>
             </section>
             <ChitsContainer />
+            <section className="wordbox">{secretWordSpan}</section>
         </main>
     );
 }
