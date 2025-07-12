@@ -5,6 +5,14 @@ import { ChitsContainer } from './components/ChitsContainer.jsx';
 function App() {
     const [currentWord, setCurrentWord] = useState('react');
 
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+
+    const keyboard = alphabet.split('').map((letter) => (
+        <button key={letter} className="keyboardBtn">
+            {letter.toUpperCase()}
+        </button>
+    ));
+
     const secretWord = currentWord.split('').map((word) => word.toUpperCase());
 
     const secretWordSpan = secretWord.map((letter, index) => (
@@ -28,6 +36,7 @@ function App() {
             </section>
             <ChitsContainer />
             <section className="wordbox">{secretWordSpan}</section>
+            <section className="keyboard">{keyboard}</section>
         </main>
     );
 }
