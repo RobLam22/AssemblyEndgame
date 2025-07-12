@@ -37,6 +37,7 @@ function App() {
             <ChitsContainer />
             <section className="wordbox">{secretWordSpan}</section>
             <section className="keyboard">{keyboard}</section>
+            <button className="new-game">New Game</button>
         </main>
     );
 }
