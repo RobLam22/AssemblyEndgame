@@ -13,7 +13,7 @@ function App() {
 
     const secretWordSpan = secretWord.map((letter, index) => (
         <span key={index} id={index} className="letterbox">
-            {letter.toUpperCase()}
+            {guesses.includes(letter) ? letter.toUpperCase() : null}
         </span>
     ));
 
