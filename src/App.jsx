@@ -1,25 +1,42 @@
 import { useState } from 'react';
 import './App.css';
 import { ChitsContainer } from './components/ChitsContainer.jsx';
+import clsx from 'clsx';
 
 function App() {
     const [currentWord, setCurrentWord] = useState('react');
-
+    const [guesses, setGuesses] = useState([]);
     const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    console.log(guesses);
+
+    const secretWord = currentWord.split('');
+
+    const secretWordSpan = secretWord.map((letter, index) => (
+        <span key={index} id={index} className="letterbox">
+            {letter.toUpperCase()}
+        </span>
+    ));
 
     const keyboard = alphabet.split('').map((letter) => (
-        <button key={letter} className="keyboardBtn">
+        <button
+            key={letter}
+            className={clsx('keyboardBtn', {
+                right: guesses.includes(letter) && secretWord.includes(letter),
+                wrong: guesses.includes(letter) && !secretWord.includes(letter),
+            })}
+            onClick={() => guessLetter(letter)}
+        >
             {letter.toUpperCase()}
         </button>
     ));
 
-    const secretWord = currentWord.split('').map((word) => word.toUpperCase());
-
-    const secretWordSpan = secretWord.map((letter, index) => (
-        <span key={index} id={index} className="letterbox">
-            {letter}
-        </span>
-    ));
+    function guessLetter(letter) {
+        setGuesses((prevGuesses) =>
+            prevGuesses.includes(letter)
+                ? prevGuesses
+                : [...prevGuesses, letter]
+        );
+    }
 
     return (
         <main>
