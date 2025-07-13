@@ -6,8 +6,8 @@ import clsx from 'clsx';
 function App() {
     const [currentWord, setCurrentWord] = useState('react');
     const [guesses, setGuesses] = useState([]);
+
     const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-    console.log(guesses);
 
     const secretWord = currentWord.split('');
 
@@ -16,6 +16,12 @@ function App() {
             {guesses.includes(letter) ? letter.toUpperCase() : null}
         </span>
     ));
+
+    const wrongGuessCount = guesses.filter(
+        (guess) => !secretWord.includes(guess)
+    ).length;
+
+    console.log(wrongGuessCount);
 
     const keyboard = alphabet.split('').map((letter) => (
         <button
