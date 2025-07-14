@@ -50,6 +50,12 @@ section.game-status.win {
 section.game-status.lose {
     background: #ba2a2a;
 }
+section.game-status.warningMsg {
+    background-color: #7a5ea7;
+    border: 1px dashed #323232;
+    display: flex;
+    justify-content: center;
+}
 
 section.game-status > p {
     margin: 5px;
@@ -86,6 +92,7 @@ span.chits.lost::after {
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 3px;
 }
 
 section.wordbox {
