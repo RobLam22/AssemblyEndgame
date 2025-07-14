@@ -122,6 +122,10 @@ section.keyboard {
     max-width: 480px;
     gap: 8px;
 }
+section.keyboard > button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
 
 button.keyboardBtn {
     width: 40px;

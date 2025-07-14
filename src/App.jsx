@@ -97,7 +97,8 @@ function App() {
                 right: guesses.includes(letter) && secretWord.includes(letter),
                 wrong: guesses.includes(letter) && !secretWord.includes(letter),
             })}
-            onClick={isGameOver ? null : () => guessLetter(letter)}
+            onClick={() => guessLetter(letter)}
+            disabled={isGameOver}
         >
             {letter.toUpperCase()}
         </button>
