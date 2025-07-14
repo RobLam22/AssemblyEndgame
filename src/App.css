@@ -11,7 +11,6 @@ body {
     height: 100vh;
     display: flex;
     justify-content: center;
-    max-width: 600px;
 }
 
 header {
@@ -34,13 +33,22 @@ header > p {
 }
 
 section.game-status {
-    background-color: #10a95b;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #f9f4da;
     border-radius: 4px;
     margin-block: 30px;
+    color: #f9f4da;
+    width: 480px;
+    height: 74px;
+}
+
+section.game-status.win {
+    background-color: #10a95b;
+}
+
+section.game-status.lose {
+    background: #ba2a2a;
 }
 
 section.game-status > p {
@@ -63,6 +71,21 @@ section.chitscontainer {
 span.chits {
     border-radius: 3px;
     padding: 4.5px;
+    position: relative;
+}
+
+span.chits.lost::after {
+    content: '💀';
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    font-size: 0.85rem;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 section.wordbox {

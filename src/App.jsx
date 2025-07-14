@@ -2,13 +2,17 @@ import { useState } from 'react';
 import './App.css';
 import { ChitsContainer } from './components/ChitsContainer.jsx';
 import clsx from 'clsx';
+import { languages } from './assets/languages.js';
 
 function App() {
+    // State values
     const [currentWord, setCurrentWord] = useState('react');
     const [guesses, setGuesses] = useState([]);
 
+    //Derived values
     const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
+    // Static values
     const secretWord = currentWord.split('');
 
     const secretWordSpan = secretWord.map((letter, index) => (
@@ -21,7 +25,12 @@ function App() {
         (guess) => !secretWord.includes(guess)
     ).length;
 
-    console.log(wrongGuessCount);
+    const isGameWon = currentWord
+        .split('')
+        .every((letter) => guesses.includes(letter));
+    const isGameLost = wrongGuessCount >= languages.length - 1;
+    const isGameOver = isGameWon || isGameLost;
+    console.log(isGameOver);
 
     const keyboard = alphabet.split('').map((letter) => (
         <button
@@ -44,6 +53,26 @@ function App() {
         );
     }
 
+    function IsGameOver() {
+        if (!isGameOver) {
+            return null;
+        } else if (isGameWon) {
+            return (
+                <>
+                    <h2>You win!</h2>
+                    <p>Well done! 🎉</p>
+                </>
+            );
+        } else if (isGameLost) {
+            return (
+                <>
+                    <h2>You lose!</h2>
+                    <p>You lose! Better start learning Assembly 😭</p>
+                </>
+            );
+        }
+    }
+
     return (
         <main>
             <header>
@@ -53,11 +82,15 @@ function App() {
                     world safe from Assembly!
                 </p>
             </header>
-            <section className="game-status">
-                <h2>You win!</h2>
-                <p>Well done! 🎉</p>
+            <section
+                className={clsx('game-status', {
+                    win: isGameWon,
+                    lose: isGameLost,
+                })}
+            >
+                <IsGameOver />
             </section>
-            <ChitsContainer />
+            <ChitsContainer wrongGuessCount={wrongGuessCount} />
             <section className="wordbox">{secretWordSpan}</section>
             <section className="keyboard">{keyboard}</section>
             <button className="new-game">New Game</button>
