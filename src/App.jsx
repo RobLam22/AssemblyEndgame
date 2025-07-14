@@ -3,11 +3,11 @@ import './App.css';
 import { ChitsContainer } from './components/ChitsContainer.jsx';
 import clsx from 'clsx';
 import { languages } from './assets/languages.js';
-import { getFarewellText } from './assets/utils.js';
+import { getFarewellText, randomWord } from './assets/utils.js';
 
 function App() {
     // State values
-    const [currentWord, setCurrentWord] = useState('react');
+    const [currentWord, setCurrentWord] = useState(() => randomWord());
     const [guesses, setGuesses] = useState([]);
 
     //Derived values
