@@ -104,6 +104,11 @@ function App() {
         </button>
     ));
 
+    function newGame() {
+        setGuesses([]);
+        setCurrentWord(randomWord());
+    }
+
     return (
         <main>
             <header>
@@ -125,7 +130,11 @@ function App() {
             <ChitsContainer wrongGuessCount={wrongGuessCount} />
             <section className="wordbox">{secretWordSpan}</section>
             <section className="keyboard">{keyboard}</section>
-            <button className="new-game">New Game</button>
+            {isGameOver && (
+                <button className="new-game" onClick={newGame}>
+                    New Game
+                </button>
+            )}
         </main>
     );
 }
