@@ -16,12 +16,6 @@ function App() {
     // Static values
     const secretWord = currentWord.split('');
 
-    const secretWordSpan = secretWord.map((letter, index) => (
-        <span key={index} id={index} className="letterbox">
-            {guesses.includes(letter) ? letter.toUpperCase() : null}
-        </span>
-    ));
-
     const wrongGuessCount = guesses.filter(
         (guess) => !secretWord.includes(guess)
     ).length;
@@ -31,6 +25,22 @@ function App() {
         .every((letter) => guesses.includes(letter));
     const isGameLost = wrongGuessCount >= languages.length - 1;
     const isGameOver = isGameWon || isGameLost;
+
+    const secretWordSpan = secretWord.map((letter, index) => {
+        const isGuessed = guesses.includes(letter);
+        const isCorrect = currentWord.includes(letter);
+
+        const className = clsx('letterbox', {
+            missing: isGuessed && isCorrect && isGameLost,
+            wrong: isGuessed && !isCorrect && isGameLost,
+        });
+
+        return (
+            <span key={index} id={index} className={className}>
+                {isGameLost || isGuessed ? letter.toUpperCase() : null}
+            </span>
+        );
+    });
 
     function guessLetter(letter) {
         setGuesses((prevGuesses) =>

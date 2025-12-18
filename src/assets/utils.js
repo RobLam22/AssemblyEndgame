@@ -4,7 +4,6 @@ export function randomWord() {
     return words[Math.floor(Math.random() * words.length)];
 }
 
-console.log(randomWord());
 export function getFarewellText(language) {
     const options = [
         `Farewell, ${language}`,

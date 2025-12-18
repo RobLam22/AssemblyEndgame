@@ -113,7 +113,9 @@ span.letterbox {
     justify-content: center;
     align-items: center;
 }
-
+span.missing {
+    background: #ec5d49;
+}
 section.keyboard {
     display: flex;
     flex-wrap: wrap;
